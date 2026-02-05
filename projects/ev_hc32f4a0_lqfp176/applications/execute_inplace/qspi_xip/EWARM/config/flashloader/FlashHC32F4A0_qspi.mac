@@ -1,0 +1,62 @@
+__var board;
+
+common_config()
+{
+    /* GPIO register write enable */
+    __writeMemory16(0xA501, 0x40053BFC, "Memory"); /* CM_GPIO->PWPR = 0xA501U */
+
+    /* GPIO read cycle 4 */
+    __writeMemory16(0x4000, 0x40053BF8, "Memory"); /* CM_GPIO->PCCR = 0x4000U */
+}
+
+ev_hc32f4a0_lqfp144_qspi()
+{
+    __message "----- QSPI Pins setting -----\n";
+
+    /* gpio pins setting high driver */
+    __writeMemory16(0x0020, 0x40053C9C, "Memory"); /* CM_GPIO->PCRC7  = 0x0020U */
+    __writeMemory16(0x0020, 0x40053C98, "Memory"); /* CM_GPIO->PCRC6  = 0x0020U */
+    __writeMemory16(0x0020, 0x40053C74, "Memory"); /* CM_GPIO->PCRB13 = 0x0020U */
+    __writeMemory16(0x0020, 0x40053C70, "Memory"); /* CM_GPIO->PCRB12 = 0x0020U */
+    __writeMemory16(0x0020, 0x40053C68, "Memory"); /* CM_GPIO->PCRB10 = 0x0020U */
+    __writeMemory16(0x0020, 0x40053C48, "Memory"); /* CM_GPIO->PCRB2  = 0x0020U */
+
+    /* gpio pins setting function */
+    __writeMemory16(0x0012, 0x40053C9E, "Memory"); /* CM_GPIO->PFSRC7  = 0x0012U  */
+    __writeMemory16(0x0012, 0x40053C9A, "Memory"); /* CM_GPIO->PFSRC6  = 0x0012U   */
+    __writeMemory16(0x0012, 0x40053C76, "Memory"); /* CM_GPIO->PFSRB13 = 0x0012U */
+    __writeMemory16(0x0012, 0x40053C72, "Memory"); /* CM_GPIO->PFSRB12 = 0x0012U */
+    __writeMemory16(0x0012, 0x40053C6A, "Memory"); /* CM_GPIO->PFSRB10 = 0x0012U */
+    __writeMemory16(0x0012, 0x40053C4A, "Memory"); /* CM_GPIO->PFSRB2  = 0x0012U */
+}
+
+setupHardware(board_index)
+{
+    __message "----- User defined operations -----\n";
+    common_config();
+
+    if (board_index == 0) {
+        ev_hc32f4a0_lqfp144_qspi();
+    } else {
+        ;
+    }
+}
+
+setup()
+{
+
+}
+
+execUserPreload()
+{
+    __message "----- QSPI User preload opration -----\n";
+    setup();
+}
+
+execUserFlashInit()  // Called by debugger before loading flash loader in RAM.
+{
+    board = 0;
+    __message "----- QSPI Prepare for Flashloader -----\n";
+    setup();
+    setupHardware(board);
+}

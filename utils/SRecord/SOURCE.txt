@@ -1,0 +1,7 @@
+SRecord is licensed under GPL-3.0.
+
+This SDK includes the unmodified SRecord binary.
+The corresponding source code is available at:
+https://github.com/sierrafoxtrot/srecord
+
+This satisfies the requirements of GPL-3.0 section 6.

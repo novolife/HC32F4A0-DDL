@@ -1,0 +1,1426 @@
+# Update History
+------
+## V2.4.0  Aug 01, 2025
+#### documents
+#### drivers
+- ##### hc32_ll_driver
+  - **generic**
+    - Modify version as Rev2.4.0
+#### midwares
+- ##### hc32/iec60730_class_b_stl
+  - Add lib files instead of IEC60730 class B source files.
+  - Refined STL_ConsoleOutputChar()
+#### projects
+- ##### ev_hc32f4a0_lqfp176/applications
+  - **functional_safety/iec60730_class_b**
+    - Change for IEC60730 class B lib files.
+#### utils
+------
+## V2.3.0  Nov 08, 2024
+#### documents
+#### drivers
+- ##### bsp/components
+  - **24cxx**
+    - Add null pointer check
+    - Add prefix to static global variable
+  - **gt9xx**
+    - Add null pointer check
+  - **nt35510**
+    - Add null pointer check
+    - Optimize function: NT35510_Init/ReadID
+    - Compliant LCD drive IC: NT35510(0x5510), ILI9341, ST7789V, SSD1963
+    - Add inline function.
+  - **rtl8201**
+    - Add rtl8201 component
+  - **tca9539**
+    - Add null pointer check
+  - **w25qxx**
+    - Add null pointer check
+  - **wm8731**
+    - Add null pointer check
+    - Add prefix to static global variable
+- ##### bsp/ev_hc32f4a0_lqfp176
+  - Modify for data overflow in function BSP_I2C_Init()
+  - Enable cache in API BSP_CLK_Init()
+  - MISRAC fix in API BSP_XTAL32_Init()
+  - FCM interface add instance
+  - Modify XTAL/XTAL32 pins definition
+  - Modify I2C peripheral clock
+  - Use EXMC_CLK port status feedback as the sample clock
+  - Optimize using DMA linked list transfer
+- ##### cmsis/Device
+  - Remove EVT_SRC_ETH_PPS_OUT_0/1
+  - Modify DBGC/DCU/DMA/QSPI/TMR4/TMR6/I2C/I2S/MAU registers
+  - Modify GPIO configuration value of QSPI
+- ##### hc32_ll_driver
+  - **generic**
+    - Modify version as Rev2.3.0
+    - Add __USED definition
+  - **interrupts_share**
+    - Add handler for USB
+    - Refine for USB interrupt
+  - **adc**
+    - Add declaration of API ADC_MxChCmd(), ADC_ConvDataAverageMxChCmd(), and add defgroup ADC_Mx_Channel
+    - Add declaration of API ADC_GetResolution()
+    - Fixed some comments
+    - Add API ADC_MxChCmd(),ADC_ConvDataAverageMxChCmd
+    - Add API ADC_GetResolution()
+    - Optimized access code for some registers to improve readability
+  - **aos**
+    - Optimize assert IS_AOS_TARGET
+  - **can**
+    - API CAN_DeInit() added return value
+    - Added macro group CAN_ID_Mask
+    - API optimized: CAN_WriteTxBuf()
+    - Replace constants with Macros
+  - **clk**
+    - Modify comment
+    - Refine API CLK_XtalStdInit and add API CLK_XtalStdCmd, CLK_SetXtalStdExceptionType
+    - Refine API CLK_XtalStdInit. and add API CLK_XtalStdCmd, CLK_SetXtalStdExceptionType
+    - Modify CLK_PLLXM_DIV_MAX as 25U
+    - Modify CLK_PLLXM_DIV_MIN as 1U
+    - Delete group definition for CLK_FREQ
+  - **cmp**
+    - Refine relation of CMP out detect flag functions and Unified Register Bit Names
+  - **crc**
+    - Add declaration of API CRC_GetResult() & CRC_SetInitValue()
+    - Modify interface of AccumulateData and Calculate functions
+    - Add API CRC_GetResult() & CRC_SetInitValue()
+    - Optimized APIs CRC_WriteData8/16/32
+  - **dac**
+    - Add align parametric in struct stc_dac_init_t
+    - All parameter assert add module name
+    - Add DAC data align configuration
+  - **dbgc**
+    - Delete redundancies API and Correct DBGC spell
+  - **dma**
+    - Modify API input param type:u16->u32
+    - Add structure stc_dma_rc_nonseq_init_t
+    - Add API DMA_ReconfigNonSeqStructInit() & DMA_ReconfigNonSeqInit()
+    - Add API DMA_MxChSWTrigger() and DMA_SWReconfig()
+    - Add API DMA_AHB_HProtBufCacheCmd()
+    - Add DMA Repeat size assert
+    - Use macros replace immediate data, modify IS_DMA_NON_SEQ_TRANS_CNT
+    - Optimize DMA_ClearErrStatus() & DMA_ClearTransCompleteStatus()
+    - Add assert IS_DMA_DATA_WIDTH_ADDR
+    - Add API DMA_MxChSWTrigger() & DMA_SWReconfig()
+  - **dmc**
+    - API EXMC_DMC_DeInit add return value
+    - Function EXMC_DMC_DeInit add return value
+  - **dvp**
+    - API DVP_DeInit add return value
+    - Modify DVP_ClearStatus for couping risk
+    - Function DVP_DeInit add return value
+  - **efm**
+    - Rename EFM_DataCacheResetCmd() as EFM_CacheRamReset() and modify comment
+    - Optimized macro group EFM_Remap_Size definitions
+    - Move EFM_CACHE_ALL from c file to head file
+    - Add prefix EFM to SECTOR_SIZE and macro EFM_PROTECT_LEVEL_ALL
+    - Add const before buffer pointer to cater top-level calls
+    - Optimize EFM_ClearStatus()
+    - Optimize condition judgment
+    - Bug Fixed # judge the EFM_FLAG_OPTEND whether set o not before clear EFM_FLAG_OPTEND
+    - Remap the sector number parameter of EFM_SingleSectorOperateCmd based on SWAP and OTP status
+  - **emb**
+    - Add macro EMB_FLAG_CLR_ALL
+    - Add EMB_EVT_ALL definition
+    - Modify assert IS_EMB_MONITOR_EVT
+    - Optimize EMB_ClearStatus function
+    - Rename macro-definition: IS_VALID_EMB_INT -> IS_EMB_INT
+  - **eth**
+    - Rename _OPERA_ to _OP_ and delete redundant definition
+    - Modify ETH_PPS_OUTPUT_FREQ_1HZ as ETH_PPS_OUTPUT_PULSE_1HZ
+    - Modify comment of defgroup ETH_PPS_Output_Frequency
+    - Extract the relevant code of PHY
+    - Add assert IS_ETH_MAC_SMI_CLK(), IS_ETH_PPS_CH_OUTPUT_FREQ(), IS_ETH_PPS_OUTPUT_MD_FREQ
+    - Optimize the process of ETH_Start() & ETH_Stop()
+    - Optimize ETH_MAC_SetInterface(), ETH_PTP_UpdateBasicAddend(), ETH_PTP_SysTimeInit(), ETH_PPS_Init()
+    - Fixed bug of ETH_PMT_EnterPowerDown() # modify && as || logic
+    - Modify ETH_PPS_SetPps0OutputFreq() as ETH_PPS_SetPpsOutputFreq()
+    - Add API ETH_MAC_SetMdcClock()
+    - Modify comment of API ETH_PPS_SetPpsOutputFreq()
+  - **fcm**
+    - Interface add instance
+    - Modify API FCM_ClearStatus(), Clear status by write instruction
+  - **fmac**
+    - All parameter assert add module name
+  - **gpio**
+    - Add assert for GPIO register lock status in API GPIO_AnalogCmd(), GPIO_ExtIntCmd()
+    - clear EFEN bit or NOCEN bit in GPIO_ExtIntCmd() before enable interrupt
+  - **hash**
+    - Modify API about CR register for couping risk
+    - Fixed HASH_HMAC_Calculate function
+  - **hrpwm**
+    - Modify macro definition group HRPWM_Global_Macros and unified the abbreviation of Calibrate
+    - unified the abbreviation of Calibrate
+  - **i2c**
+    - Adjust I2C_FLAG_ALL & I2C_FLAG_CLR_ALL & I2C_INT_ALL
+    - Add I2C_Flag_Clear def group
+    - Fix I2C_Deinit
+    - Rename related to SMBus Alert Response Address
+    - Modify I2C_Restart()
+    - Modify macro IS_I2C_INT_FLAG -> IS_I2C_INT
+    - Modify I2C_CR1_ENGC to I2C_CR1_GCEN
+    - Modify the I2C_BaudrateConfig func rounding off method
+    - Modify duty cycle for SCL
+    - Modify I2C_CCR_FREQ to I2C_CCR_CKDIV
+  - **i2s**
+    - Optimize I2S_DeInit()
+    - Removed I2S_RST_TYPE_CODEC
+    - Optimize calculate for I2SDIV and ODD in MCK enabled mode
+    - Delete needless set data in I2S_Init function
+  - **icg**
+    - Modify macro define: ICG_SWDT_LPM_CNT_CONTINUE -> ICG_SWDT_LPM_CNT_CONT
+    - Delete ICG2 function
+    - Modify comment of ICG_BOR_Voltage_Threshold
+    - Add __USED for optimize
+  - **interrupts**
+    - Modify INTC filter B macros correspond with RM
+    - Modify API NMI_ClearNmiStatus(),EXTINT_ClearExtIntStatus() Clear status by write instruction
+    - clear EFEN bit in EXTINT_Init()
+  - **mau**
+    - All parameter assert add module name
+  - **mpu**
+    - Add structure stc_mpu_unit_init_t, and declaration of MPU_UnitInit(), MPU_UnitStructInit()
+    - Refine def group MPU_Flag
+    - Add API MPU_UnitInit(), MPU_UnitStructInit()
+  - **nfc**
+    - Update API function parameter: EXMC_NFC_Read/EXMC_NFC_Write
+    - API EXMC_NFC_DeInit add return value
+    - Remove C Library function: memcpy
+    - Optimize EXMC_NFC_Read/EXMC_NFC_Write parameter
+    - Function EXMC_NFC_DeInit add return value
+    - Optimize function EXMC_NFC_ReadId
+  - **pwc**
+    - Refine API PWC_SLEEP_Enter()
+    - Add API PWC_PD_SetIoState & PWC_PD_SetMode and add return value to PWC_PD_Enter
+    - Remove redundant assert
+    - Modify API PWC_PD_Enter() #use assert to replace the unlock, and add return value
+    - Modify API PWC_STOP_Enter() #delete redundancies code
+    - Unified the operation mode for register
+    - Refine PWC_SLEEP_Enter()
+    - Add API PWC_PD_SetIoState() & PWC_PD_SetMode()
+    - Add assert in PWC_PD_Config()
+    - Modify LVD initialize process
+    - Remove macro PWC_LVD_EXT_INPUT_EN_REG & PWC_LVD_EXT_INPUT_EN_BIT & PWC_LVD_CMP_OUTPUT_EN_REG & PWC_LVD_CMP_OUTPUT_EN_BIT
+    - Modify PWC_LVD_ClearStatus & PWC_PD_ClearWakeupStatus for couping risk
+    - Couping Risks caused by modifying the status bits of the WKTM
+    - Modify macro name IS_PWC_WKT_COMPARISION_VALUE as IS_PWC_WKT_COMPARISON_VALUE
+    - Accessed CM_PWC->WKTC2 in 8-bit
+    - Add assert for PWC_STOP_Enter()
+  - **qspi**
+    - Delete judgement condition when switching to direct communication mode
+    - Modify QSPI->SR2 to QSPI->CLR
+  - **rmu**
+    - Modify IS_VALID_RMU_RST_FLAG -> IS_RMU_RST_FLAG
+  - **rtc**
+    - Modify RTC_EnterRwMode,RTC_ExitRwMode,RTC_ConfirmLPMCond,RTC_SetIntPeriod,RTC_AlarmCmd,RTC_IntCmd,RTC_ClearStatus for couping risk
+    - Optimized access code for some registers to improve readability
+  - **sdioc**
+    - Add parameter for SDMMC_CMD38_Erase
+  - **smc**
+    - Rename macro-define: EXMC_SMC_READ_BURST_CONTINUOUS -> EXMC_SMC_READ_BURST_INFINITE
+    - Rename macro-define: EXMC_SMC_WRITE_BURST_CONTINUOUS -> EXMC_SMC_WRITE_BURST_INFINITE
+    - Update macro: EXMC_SMC_READ_BURST_CONTINUOUS -> EXMC_SMC_READ_BURST_INFINITE
+    - Update macro: EXMC_SMC_WRITE_BURST_CONTINUOUS -> EXMC_SMC_WRITE_BURST_INFINITE
+  - **spi**
+    - Rename SPI_FLAG_OVERLOAD as SPI_FLAG_OVERRUN, SPI_FLAG_UNDERLOAD as SPI_FLAG_UNDERRUN
+    - Modify API API_xxxConfig() to SPI_Setxxx() and refine SPI_SetSSValidLevel, modify SPI_IRQ_ALL -> SPI_INT_ALL
+    - Modify some assert
+    - Rename some API SPI_xxxConfig as SPI_Setxxx
+    - Refine API SPI_Init()
+    - Add Send restriction in SPI_TxRx function
+    - Modify SPI_DeInit,SPI_ClearStatus for couping risk
+  - **sram**
+    - Refine def group SRAM_ECC_Mode, and refine def group SRAM_Err_Mode as SRAM_Exception_Type
+    - Add macro SRAM_ECC_SRAM_ALL and group SRAM_Check_SRAM
+    - Refine SRAM_SetEccMode, and refine SRAM_SetErrorMode() as SRAM_SetExceptionType
+    - Modify assert IS_SRAM_ECC_MD()
+  - **swdt**
+    - Modify macro define: SWDT_LPM_CNT_CONTINUE -> SWDT_LPM_CNT_CONT
+    - Modify API SWDT_ClearStatus() for couping risk
+  - **tmr0**
+    - Modify API of TMR0_DeInit()
+    - Modify TMR0_ClearStatus for couping risk
+  - **tmr2**
+    - API TMR2_DeInit() added return value
+    - Modify TMR2_DeInit()
+    - Modify TMR2_ClearStatus for couping risk
+  - **tmr4**
+    - Fix bug that the status flag of CCSR/OCSR for couping risk
+    - Refine TMR4_GetStatus()
+    - Fix misra warning, MODIFY_REG->MODIFY_RCSR_REG
+  - **tmr6**
+    - Modify for headfile update: CM_TMR6CR -> CM_TMR6_COMMON
+    - Modify API TMR6_ClearStatus() for couping risk
+  - **tmra**
+    - API TMRA_DeInit() added return value
+    - API TMRA_DeInit() refined
+    - Modify PCONR reg from RW_MEM16 to MODIFY_REG16 in TMRA_PWM_Init() function
+    - Modify TMRA_CountReloadCmd,TMRA_ClearStatus,TMRA_IntCmd for couping risk
+    - Optimized access code for some registers to improve readability
+  - **trng**
+    - Use MODIFY_REG32() to prevent reserved bit from being overwritten
+  - **usart**
+    - Add the declaration of API USART_GetFuncState()
+    - Add interfaces for getting USART configuration status
+    - Add API USART_GetFuncState()
+    - Add assert for the register bit can only be set when TE=0&RE=0
+    - Optimize condition judgment
+    - Add assert for pvBuf pointer alignment for data width 9bit
+  - **usb**
+    - Modify for macro define USB_MAX_TX_FIFOS
+    - Modify parameter type in function usb_FrameIntervalConfig():uint8_t -> uint32_t
+    - Modify API usb_wrpkt & usb_rdpkt for C-STAT
+    - Select default internal PHY for USBFS core
+  - **utility**
+    - Optimized the Delay functions as cache is enabled
+  - **wdt**
+    - Modify macro define: WDT_LPM_CNT_CONTINUE -> WDT_LPM_CNT_CONT
+    - Modify API WDT_ClearStatus() for couping risk
+#### midwares
+- ##### hc32/emulate_eeprom
+  - Add flash emulate eeprom midware
+- ##### hc32/iap
+  - Modify u8FrameData to 4-byte alignment
+  - Fix cppcheck warning
+- ##### hc32/iec60730_class_b_stl
+  - Add compiler macros pre-processor: GCC and AC6
+  - Use STL_RetargetPrintf() replace printf() of the C lib.
+  - Fix warning: MISRAC2012-Rule-8.4
+  - Assign m_pu32MarchRAM using the variable m_au32MarchRAM
+- ##### hc32/usb
+  - Support Microsoft OS descriptor
+  - Modify for macro define USB_MAX_TX_FIFOS
+  - Delete undesired EP status setting operation
+  - Add USB class WinUSB midware
+  - Modify for control write transfer for USB DMA mode
+  - Optimize the interface init function
+  - Modify for MISRA
+  - Optimize the interface struct
+  - Change the DataLength in the _CDCXfer struct from u16 to u32
+  - Change the length parameter in the usb_host_cdc_senddata() from u16 to u32
+  - Add a CDC Request state
+  - Optimize assignment operation
+  - Modify for channel distribute and free
+  - Modify usb_host_chx_in_isr() for BBERR flag
+  - Clear ACK flag when XFRC in usb_host_chx_in_isr() function
+  - Clear CHH flag when XFRC in usb_host_chx_in_isr() and usb_host_chx_out_isr() function
+  - Modify function usb_host_parsecfgdesc()
+#### projects
+- ##### ev_hc32f4a0_lqfp176/applications
+  - **functional_safety/iec60730_class_b**
+    - Add clock initialization
+    - Change STL_ADC_AWD_LOW_THRESHOLD_VOL value: 1.6F -> 1.5F
+    - FCM interface add instance
+    - Replace peripheral WDT with SWDT to avoid dependencies on the system clock
+  - **iap/iap_boot**
+    - Re-config SRAM read/write wait cycle
+    - Modify XTAL pins definition
+  - **iap/iap_ymodem_boot**
+    - Re-config SRAM read/write wait cycle
+    - Modify XTAL pins definition
+  - **usb/usb_dev_cdc**
+    - Optimize print information
+    - Support Microsoft OS descriptor
+  - **usb/usb_dev_cdc_msc**
+    - Re-config SRAM read/write wait cycle
+    - Optimize print information
+    - Support Microsoft OS descriptor
+    - Update for new SDIOC midwares
+  - **usb/usb_dev_hid_cdc**
+    - Modify timer0 clock division for asynchronous clock
+    - Optimize print information
+    - Support Microsoft OS descriptor
+  - **usb/usb_dev_hid_custom**
+    - Modify timer0 clock division for asynchronous clock
+    - Optimize print information
+    - Support Microsoft OS descriptor
+  - **usb/usb_dev_hid_msc**
+    - Re-config SRAM read/write wait cycle
+    - Optimize print information
+    - Support Microsoft OS descriptor
+    - Update for new SDIOC midwares
+  - **usb/usb_dev_mouse**
+    - Optimize print information
+    - Support Microsoft OS descriptor
+  - **usb/usb_dev_msc**
+    - Re-config SRAM read/write wait cycle
+    - Optimize print information
+    - Support Microsoft OS descriptor
+    - Update for new SDIOC midwares
+  - **usb/usb_host_cdc**
+    - Add BSP_KEY_Init() in the usb_bsp_init() function
+    - Optimize print information
+    - Remove unused code in host_user_userinput() function
+    - Redesign the CDC data tx and rx application demo
+    - Modify user state definition
+  - **usb/usb_host_mouse_kb**
+    - Optimize print information
+  - **usb/usb_host_msc**
+    - Optimize print information
+- ##### ev_hc32f4a0_lqfp176/examples
+  - **adc/adc_awd**
+    - Modify macro TMR0_CMP_VAL value
+  - **adc/adc_hard_trigger**
+    - Modify macro TMR0_CMP_VAL value
+  - **can/can_classical**
+    - Example optimized.
+  - **can/can_fd**
+    - Example optimized.
+  - **clk/clk_xtalstop_detect**
+    - Use CLK_XtalStdInit() to replace XtalStopDetctInit()
+    - Modify XTAL_STOP_IrqCallback
+  - **cmp/cmp_window**
+    - Delete DAC_DataRegAlignConfig() due to align configure in DAC_Init()
+  - **crc/crc_hw_accumulate_check**
+    - Modify code due to CRC interface change
+  - **crc/crc_hw_encode_hw_check**
+    - Modify code due to CRC interface change
+  - **crc/crc_hw_encode_sw_check**
+    - Modify code due to CRC interface change,and
+    - Fix cppcheck warning
+  - **ctc/ctc_ctcref_trimming**
+    - Implement the weak function: CTC_Udf/Ovf_IrqHandler
+    - Optimize process
+  - **ctc/ctc_xtal32_trimming**
+    - Implement the weak function: CTC_Udf/Ovf_IrqHandler
+  - **ctc/ctc_xtal_trimming**
+    - Implement the weak function: CTC_Udf/Ovf_IrqHandler
+  - **dac/dac_base**
+    - Delete DAC_DataRegAlignConfig() due to align configure in DAC_Init()
+  - **dac/dac_sync_mode**
+    - Delete DAC_DataRegAlignConfig() due to align configure in DAC_Init()
+  - **dcu/dcu_compare**
+    - Add m_u8DoneFlag to indicate interrupt done
+  - **dcu/dcu_sawtooth_wave_mode**
+    - Delete DAC_DataRegAlignConfig() due to align configure in DAC_Init()
+    - Add DAC_StructInit() before DAC_Init()
+  - **dcu/dcu_triangle_wave_mode**
+    - Delete DAC_DataRegAlignConfig() due to align configure in DAC_Init()
+    - Add DAC_StructInit() before DAC_Init()
+    - Fix the enabled interrupt type
+  - **dmac/dmac_base**
+    - Optimize DMA2_Error_IrqCallback()
+    - Add DMA transform tigger by software
+  - **efm/efm_dbus**
+    - Optimaize code process
+  - **efm/efm_protect**
+    - Disable cache while chip erase & set read only after chip erase
+  - **emb/emb_cmp_brake_timer4**
+    - Delete DAC_DataRegAlignConfig() due to align configure in DAC_Init()
+    - Add DAC_StructInit() before DAC_Init()
+  - **emb/emb_cmp_brake_timer6**
+    - Delete DAC_DataRegAlignConfig() due to align configure in DAC_Init()
+    - Add DAC_StructInit() before DAC_Init()
+  - **eth/eth_loopback**
+    - Strip PHY operation code into BSP file
+    - Add high driver for ETH output pin
+    - Delete interrupt codes of RMII interface
+  - **eth/eth_twoboards**
+    - Optimize the init process of ETH
+    - Add high driver for ETH output pin
+    - Strip PHY operation code into BSP file
+    - Re-config SRAM read/write wait cycle
+  - **exmc/exmc_nfc_nandflash_mt29f2g08ab**
+    - Fix bug: 4BitECC m_au8WriteDataHwEcc value error
+  - **fcm/fcm_freq_measure**
+    - FCM interface add instance
+  - **hash/hash_hmac**
+    - Delete interrupt mode
+  - **i2c/i2c_master_dma**
+    - Clear DMA transfer completed flag before DMA start
+  - **i2c/i2c_slave_dma**
+    - Clear DMA transfer completed flag before DMA start
+  - **i2c/i2c_slave_int**
+    - Add STOPF clearing to eei callback
+  - **i2s/i2s_play_audio**
+    - Remove the configuration of unused pin
+  - **i2s/i2s_record_and_play**
+    - Optimize using DMA linked list transfer
+  - **intc/intc_extint_key**
+    - Integrate global, group, share interrupt in one project
+  - **intc/intc_swint**
+    - Change the flashing LEDs from all to only blue for simple.
+  - **mau/mau_base**
+    - Optimize software calculate sqrt formula
+    - Use MRC and set PCLK4 for better random data
+  - **mpu/mpu_core_write_protect**
+    - Modify protect region from RTC to SRAM
+  - **rtc/rtc_calendar**
+    - Add XTAL32 clock source selection for RTC
+  - **rtc/rtc_calibration_output**
+    - Variable name changed: from u16CompenVal to i16CompenVal
+  - **rtc/rtc_intrusion_detect**
+    - Place BSP_XTAL32_Init function after PWC_VBAT_Reset function
+  - **sdioc/sdioc_mmc**
+    - Re-config SRAM read/write wait cycle
+  - **sdioc/sdioc_sd**
+    - Re-config SRAM read/write wait cycle
+  - **sdioc/sdioc_sdio**
+    - Re-config SRAM read/write wait cycle
+  - **timer0/timer0_basetimer**
+    - Modify timer0 clock division for asynchronous clock
+  - **timer0/timer0_capture**
+    - Change Timer0 interrupt priority to (DDL_IRQ_PRIO_DEFAULT - 1U)
+  - **timer6/timer6_cmp_deadtime**
+    - Modify transfer condition of general buffer
+  - **timer6/timer6_cmp_sawtooth_dual_buf**
+    - Modify compare register buffer initialization value
+  - **timer6/timer6_cmp_triangular_buf**
+    - Modify compare register buffer initialization value
+  - **timer6/timer6_sw_sync**
+    - Delete CHB output pin
+  - **timer6/timer6_valid_period**
+    - Modify compare register buffer initialization value
+  - **timera/timera_pwm**
+    - Set the initial value of the count register to 1 when using triangle wave mode to output PWM.
+  - **trng/trng_base**
+    - Set PCLK4 for better random data.
+  - **usart/usart_clocksync_dma**
+    - Fixed the return value type of ClockSync_Receive_DMA() and ClockSync_TransReceive_DMA()
+  - **usart/usart_uart_dma**
+    - Optimize function: USART_TxComplete_IrqCallback
+    - Add function: USART_StopTimeoutTimer
+#### utils
+------
+## V2.2.0  Sep 30, 2023
+#### documents
+#### drivers
+- ##### bsp/components
+  - **nt35510**
+    - Optimize function arguments
+- ##### bsp/ev_hc32f4a0_lqfp176
+  - Fix some typo: KYESCAN -> KEYSCAN
+  - Add API BSP_XTAL32_Init()
+  - Optimize function BSP_I2C_Init()
+  - Add include file named hc32_ll_fcm.h and add declaration of BSP_XTAL32_Init()
+  - Modify DMC timing for EXCLK frequency 60MHz -> 30MHz
+  - Modify SMC timing parameter: EXCLK 60MHz -> 30MHz
+  - Optimize comments
+  - Change Reset control pin from NMOS to CMOS output cause of "EV_F4A0_LQ176_Rev1.0"'s modification
+  - Rename local variables: stcTca9539Config -> m_stcTca9539Config
+  - Modify the IO properties of SPI
+  - Modify for MISRAC2012
+  - Modify SPI clock divide factor from DIV4 to DIV64
+  - Modify 'BSP_SPI_TIMEOUT' to HCLK_VALUE
+  - Rename local variables: stcWm8731Config -> m_stcWm8731Config
+- ##### cmsis/Device
+  - Modify headfile based on reference manual Rev1.3
+- ##### hc32_ll_driver
+  - **generic**
+    - Modify version as 2.2.0
+    - Modify typo
+    - Add __NO_OPTIMIZE configuration item
+    - Add attribute for __RAM_FUNC definition
+  - **interrupts_share**
+    - Modify typo
+    - IRQxxx_Handler add __DSB for Arm Errata 838869
+    - The BCSTR register of TimerA is split into BCSTRH and BCSTRL
+    - Modify for head file update: EIRQFR -> EIFR
+  - **adc**
+    - Modify typo
+    - API fixed: ADC_DeInit()
+  - **aes**
+    - Add API AES_DeInit()
+  - **aos**
+    - Modify for new head file
+  - **can**
+    - Added 3 APIs for local-reset
+    - Modify typo
+    - Added 3 APIs for local-reset.Refine local function CAN_ReadRxBuf(), CAN_WriteTxBuf()
+  - **clk**
+    - Modify typo
+    - Modify CLK_SetUSBClockSrc(), add delay after configure USB clock
+    - Modify API CLK_Xtal32Cmd(), CLK_MrcCmd() and CLK_LrcCmd(), use DDL_DelayUS() to replace CLK_Delay()
+  - **cmp**
+    - Modify typo
+    - Add assert for CIEN bit in GetCmpFuncStatusAndDisFunc function
+    - Remove redundant code in function CMP_WindowModeInit
+  - **crc**
+    - Reconstruct interface function relate to calculate CRC
+    - Modify return type of function CRC_DeInit
+    - Modify comment
+    - Delete and modify some of group/function relate to calculate CRC
+    - Optimize CRC_DeInit function
+    - Modify typo
+  - **ctc**
+    - Modify typo
+    - Modify the init assignment of i32Ret in CTC_DeInit()
+  - **dac**
+    - Refine definition of dac resolution
+    - Modify API DAC_DeInit
+    - Refine data validation
+    - Modify function:DAC_DeInit
+  - **dbgc**
+    - Add hc32_ll_dbgc driver
+  - **dcu**
+    - Modify typo
+    - Delete macro definition: DCU_INT_SAWTOOTH_WAVE_RELOAD
+    - Modify macro-definition according to RM:DCU_CTL_COMP_TRG->DCU_CTL_COMPTRG
+    - Modify API DCU_DeInit()
+    - Modify function DCU_IntCmd() for misra
+  - **dma**
+    - Add API DMA_SetDataWidth()
+    - Modify typo
+    - Modify blocksize assert, 1024U is valid
+    - Optimize set blocksize & repeat count process
+  - **dmc**
+    - Modify typo
+  - **dvp**
+    - Modify typo
+    - Add function: DVP_GetCaptureState
+  - **efm**
+    - Add FLASH security addr define
+    - Modify API EFM_OTP_Lock()
+    - Modify API EFM_Program()
+    - Modify assert IS_EFM_ADDR() range
+    - Modify typo
+    - Modify API EFM_WriteSecurityCode(), switch to read_only mode before exit
+    - Use FNWPRT_REG to replace CM_EFM->F0NWPRT0
+    - Remove address assert from EFM_ReadByte()
+    - Refine EFM_SequenceProgram() & EFM_ChipErase(), and put them in RAM
+  - **emb**
+    - Update EMB_CTL1_CMPEN0~3 to EMB_CTL1_CMPEN1~4
+    - Update EMB_INTEN_PORTINTEN to EMB_INTEN_PORTININTEN
+    - Function EMB_TMR4_Init don't call EMB_DeInit
+    - Function EMB_TMR6_Init don't call EMB_DeInit
+    - Function EMB_DeInit set register EMB_RLSSEL to reset value
+  - **eth**
+    - Modify typo
+    - Add ETH_MAC_SetInterface function
+    - Optimize ETH start and stop timing
+    - Modify the process of obtaining PHY status
+    - Modify the process of auto-negotiation disable
+    - Modify ETH_PTP_UpdateBasicAddend function
+    - Modify the clock division of SMIC
+    - Modify operation sequence of ETH_DeInit function
+  - **event_port**
+    - Modify typo
+    - Modify for new head file
+  - **fcg**
+    - Modify for head file update: PWC_FCG3_CMP1->PWC_FCG3_CMP12, PWC_FCG3_CMP2->PWC_FCG3_CMP34
+  - **fcm**
+    - Modify API FCM_DeInit()
+  - **fmac**
+    - Modify API FMAC_DeInit()
+  - **gpio**
+    - Rename GPIO_ExIntCmd() as GPIO_ExtIntCmd
+    - Modify GPIO_SetFunc()
+    - Optimize API: GPIO_Init(), GPIO_SetFunc(), GPIO_SubFuncCmd(), GPIO_InputMOSCmd(), GPIO_AnalogCmd(), GPIO_ExtIntCmd()
+  - **hash**
+    - Add HASH_DeInit function
+  - **hrpwm**
+    - Modify typo
+  - **i2c**
+    - Modify typo
+    - Move macro define I2C_SRC_CLK to head file
+    - Disable slave address function in I2C_Init()
+  - **i2s**
+    - Modify I2S_ClearStatus function
+  - **interrupts**
+    - IRQxxx_Handler add __DSB for Arm Errata 838869
+    - Modify micro define EIRQCFR_REG and EIRQFR_REG base RM
+    - Remove space line
+  - **keyscan**
+    - Add function KEYSCAN_DeInit
+  - **mau**
+    - Add API MAU_DeInit()
+  - **mpu**
+    - Modify typo
+    - Optimize MPU_ClearStatus function
+  - **nfc**
+    - Modify typo
+    - Add API function: EXMC_NFC_Read/EXMC_NFC_Write
+    - Typo: featrue -> feature; regsiter, Regster -> register
+    - Modify macro: EXMC_NFC_4BIT_ECCS -> EXMC_NFC_4BIT_ECC
+    - Change function attributes from local to global: EXMC_NFC_Read/EXMC_NFC_Write
+  - **ots**
+    - Modify typo
+    - Modify API OTS_DeInit()
+  - **pwc**
+    - Modify group PWC_Stop_Type
+    - Add function PWC_LVD_DeInit
+    - Modify the PWC_LVD_Detection_Voltage_Sel comment
+    - Modify typo
+    - Add api PWC_LVD_DeInit()
+    - Modify API PWC_STOP_Enter() & add assert IS_PWC_STOP_TYPE()
+  - **qspi**
+    - Modify return value type of QSPI_DeInit function
+    - Optimize QSPI_ClearStatus function
+  - **rmu**
+    - Use IS_RMU_UNLOCKED() to assert
+  - **rtc**
+    - Modify typo
+  - **sdioc**
+    - Modify typo
+    - Rename function SDMMC_ACMD41_SendOperatCond to SDMMC_ACMD41_SendOperateCond
+    - Rename function SDMMC_CMD1_SendOperatCond to SDMMC_CMD1_SendOperateCond
+    - Support CMD5/CMD52/CMD53
+    - Rename macro definition SDIOC_ACMD52_RW_DIRECT to SDIOC_CMD52_IO_RW_DIRECT
+    - Rename macro definition SDIOC_ACMD53_RW_EXTENDED to SDIOC_CMD53_IO_RW_EXTENDED
+    - Modify response type of MMC CMD3
+    - Optimize SDIOC_GetMode function
+  - **smc**
+    - API EXMC_SMC_DeInit add return value
+    - Function EXMC_SMC_DeInit add return value
+  - **spi**
+    - Add SPI_SetSckPolarity,SPI_SetSckPhase functions
+    - Add group SPI_SCK_Polarity_Define, SPI_SCK_Phase_Define
+    - Modify return type of fuction SPI_DeInit
+    - Modify SPI_GetStatus,SPI_TxRx,SPI_Tx function
+  - **sram**
+    - Modify typo
+    - API fixed: SRAM_ClearStatus()
+    - API fixed: SRAM_SetWaitCycle()
+  - **swdt**
+    - Optimize SWDT_ClearStatus function timeout
+  - **tmr0**
+    - Modify typo
+  - **tmr2**
+    - Modify typo
+  - **tmr4**
+    - Add the macros group @ref TMR4_OC_Output_Polarity
+    - Modify typo
+    - TMR4_OC_Buffer_Object group add macro-definition: TMR4_OC_BUF_NONE
+    - Modify API TMR4_DeInit
+    - Fix spell error about "response" that in function name
+    - Add function comments: macros group @ref TMR4_OC_Channel
+    - Modify function return value comments: TMR4_OC_GetPolarity
+    - Modify function parameter comments: TMR4_PWM_SetPolarity
+    - Modify function: TMR4_DeInit, TMR4_OC_DeInit, TMR4_PWM_DeInit, TMR4_EVT_DeInit
+    - Modify macro-definition: IS_TMR4_OC_BUF_OBJECT
+    - Fix magic number of function:  TMR4_OC_StructInit
+    - Modify fuction:TMR4_PWM_Init
+    - Modify comment
+  - **tmr6**
+    - Delete union in stc_tmr6_init_t structure
+    - Modify macro define for group TMR6_Emb_Ch_Define
+    - Add macro define for TMR6_Count_Dir_Status_Define
+    - Modify typo
+    - Modify API TMR6_GetCountDir()
+  - **tmra**
+    - Modify typo
+    - Update about split 16bit register TMRA_BCSTR into two 8bit registers TMRA_BCSTRH and TMRA_BCSTRL
+    - Delete union in stc_tmra_init_t structure
+    - Modify some of member type of struct stc_tmra_init_t and relate fuction about these member
+    - Modify macro-definition value for group TMRA_Interrupt_Type/TMRA_Status_Flag
+    - Rename marco definition IS_TMRA_CMPVAL_BUF_COND to IS_TMRA_BUF_TRANS_COND
+  - **trng**
+    - Add TRNG_Cmd,TRNG_DeInit functions
+    - API optimized for better random numbers: TRNG_GenerateRandom()
+    - API fixed: rewrite TRNG_GenerateRandom() to Support get multiple random data
+    - API optimized for better random numbers: TRNG_GenerateRandom(), TRNG_GetRandom()
+    - Add TRNG_Cmd,TRNG_DeInit functions and optimize TRNG_Start function
+    - Optimize the processing of discarded data and enable TRNG in TRNG_Init()
+  - **usart**
+    - Modify typo
+    - Change macro-definition: USART_DR_MPID -> USART_TDR_MPID
+    - Modify USART_SetTransType parameter: u32Type -> u16Type
+    - Modify USART_SC_ETU_CLK128/256 value
+    - Modify return type of function USART_DeInit
+    - Remove u32StopBit param from stc_usart_smartcard_init_t structure
+    - Add function note: USART_FuncCmd
+    - Round off baudrate fraction division
+    - Split register USART_DR to USART_RDR and USART_TDR
+    - Delete function: USART_GetUsartClockDiv
+    - Fix MISRAC2012 warning: USART_GetUsartClockFreq
+    - Code Refine
+    - Modify return type of function USART_DeInit()
+    - Modify USART_SmartCard_Init() for stc_usart_smartcard_init_t has modified(u32StopBit has removed)
+    - Fix bug: did not enable MP while USART_MultiProcessor_Init()
+    - Re-define IS_USART_SMARTCARD_UNIT
+    - API refined: USART_SetBaudrate()
+  - **usb**
+    - Modify typo
+    - Fix bug for function usb_clearepstall()
+  - **utility**
+    - Modify register USART DR to USART TDR
+    - Prohibit DDL_DelayMS and DDL_DelayUS functions from being optimized
+  - **wdt**
+    - Optimize WDT_ClearStatus function timeout
+#### midwares
+- ##### hc32/iec60730_class_b_stl
+  - Modify register USART DR to USART TDR
+- ##### hc32/usb
+  - Modify for variable alignment
+  - Typo: Initailizes -> Initializes
+  - Modify API usb_dev_resume()
+  - Modify function usb_susp_isr()
+  - Modify for doxygen
+  - Replace MAX_CHNUM by USB_MAX_CH_NUM
+  - Delete micro define MAX_CHNUM
+#### projects
+- ##### ev_hc32f4a0_lqfp176/applications
+  - **execute_inplace/qspi_xip**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **functional_safety/iec60730_class_b**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Change STL IO test input pin: PA0 -> PH7
+    - Initialize XTAL32 using BSP_XTAL32_Init
+    - Modify sw_count field of stc_tmra_init_t: u16xxx -> u8xxx
+  - **iap/iap_app**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Rename function CRC_CalculateData8 to CRC_CRC16_Calculate
+  - **iap/iap_boot**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Rename function CRC_CalculateData8 to CRC_CRC16_Calculate
+  - **iap/iap_ymodem_app**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **iap/iap_ymodem_boot**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **usb/usb_dev_cdc_msc**
+    - Rename function SDMMC_ACMD41_SendOperatCond to SDMMC_ACMD41_SendOperateCond
+    - Do not erase SD card before write operation
+  - **usb/usb_dev_hid_msc**
+    - Rename function SDMMC_ACMD41_SendOperatCond to SDMMC_ACMD41_SendOperateCond
+    - Do not erase SD card before write operation
+  - **usb/usb_dev_mouse**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **usb/usb_dev_msc**
+    - Rename function SDMMC_ACMD41_SendOperatCond to SDMMC_ACMD41_SendOperateCond
+    - Do not erase SD card before write operation
+  - **usb/usb_host_cdc**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **usb/usb_host_mouse_kb**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **usb/usb_host_msc**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+- ##### ev_hc32f4a0_lqfp176/examples
+  - **adc/adc_awd**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **adc/adc_base**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **adc/adc_channel_remap**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **adc/adc_dma**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **adc/adc_extended_channel**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **adc/adc_hard_trigger**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **adc/adc_pga**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **adc/adc_sample_hold**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **aes/aes_base**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **can/can_classical**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **can/can_fd**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Changed baudrate of data phase from 8Mbps to 5Mbps.
+  - **can/can_ttcan**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **clk/clk_switch_sysclk**
+    - Modify XTAL32 initialize process, use BSP_XTAL32_Init() to replace Xtal32Init()
+  - **crc/crc_hw_accumulate_check**
+    - Add crc_hw_accumulate_check example
+  - **crc/crc_hw_encode_hw_check**
+    - Modify for reconstructed API
+  - **crc/crc_hw_encode_sw_check**
+    - Modify for reconstructed API
+  - **ctc/ctc_xtal32_trimming**
+    - Initialize XTAL32 using BSP_XTAL32_Init
+  - **dac/dac_base**
+    - Define DAC_DATA_MAX by resolution
+  - **dac/dac_sync_mode**
+    - Define DAC_DATA_MAX by resolution
+  - **dcu/dcu_sawtooth_wave_mode**
+    - Sync driver: DCU reload interrupt is always valid
+  - **dmac/dmac_base**
+    - Add DMA2_Error_IrqCallback function
+  - **dvp/dvp_camera_display**
+    - Re-implement code
+  - **efm/efm_chip_erase**
+    - Add efm_chip_erase example
+  - **efm/efm_dbus**
+    - Add efm_dbus example
+  - **efm/efm_otp**
+    - Modify the process
+  - **efm/efm_sequence_program**
+    - Add Customize defintion
+    - Re-structure
+  - **efm/efm_swap**
+    - Use EFM_GetSwapStatus to judge
+  - **emb/emb_cmp_brake_timer4**
+    - Typo: hander -> handler
+    - Fix magic number
+    - Modify TMR4_PwmConfig: enable main output following PWM initialization
+  - **emb/emb_cmp_brake_timer6**
+    - Modify typo
+    - Fix magic number
+  - **emb/emb_osc_brake_timer4**
+    - Typo: hander -> handler
+    - Modify TMR4_PwmConfig: enable main output following PWM initialization
+  - **emb/emb_osc_brake_timer6**
+    - Modify typo
+  - **emb/emb_port_brake_timer4**
+    - Typo: hander -> handler
+    - Modify TMR4_PwmConfig: enable main output following PWM initialization
+  - **emb/emb_port_brake_timer6**
+    - Modify typo
+  - **emb/emb_pwm_brake_timer4**
+    - Typo: hander -> handler
+    - Modify TMR4_PwmConfig: enable main output following PWM initialization
+  - **emb/emb_pwm_brake_timer6**
+    - Modify typo
+  - **emb/emb_sw_brake_timer4**
+    - Modify TMR4_PwmConfig: enable main output following PWM initialization
+  - **emb/emb_sw_brake_timer6**
+    - Modify typo
+  - **eth/eth_loopback**
+    - Modify the process of obtaining PHY status
+    - Add MAC interface selection before ETH_DeInit function
+    - Disable auto negotiation in low_level_init function
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **eth/eth_twoboards**
+    - Add MAC interface selection before ETH_DeInit function
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **exmc/exmc_dmc_sdram_is42s16400j7tli**
+    - Modify EXCLK frequency: 60MHz -> 30MHz
+    - Fix typos
+    - Fix memory address printf value
+  - **exmc/exmc_sdram_sram**
+    - Modify EXCLK frequency: 60MHz -> 30MHz
+    - Fix typos
+    - Fix memory address printf value
+  - **exmc/exmc_smc_lcd_nt35510**
+    - Change EXCLK freqeuncy to 30MHz
+  - **exmc/exmc_smc_sram_is62wv51216**
+    - Modify EXCLK frequency: 60MHz -> 30MHz
+    - Fix typos and modify file brief
+    - Fix memory address printf value
+  - **hash/hash_base**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **hash/hash_hmac**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **hrpwm/hrpwm_output**
+    - Modify for Peripheral clock command process
+  - **i2c/i2c_master_dma**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Add definition I2C_ADDR_MD as address condition select
+    - Configure DMA interrupt disable in I2C_DMA_Initialize() function
+  - **i2c/i2c_master_int**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **i2c/i2c_master_polling**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Add definition I2C_ADDR_MD as address condition select
+  - **i2c/i2c_slave_dma**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Add definition I2C_ADDR_MD as address condition select
+    - Configure DMA interrupt disable in I2C_DMA_Initialize() function
+  - **i2c/i2c_slave_int**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Add definition I2C_ADDR_MD as address condition select
+  - **i2c/i2c_slave_polling**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+    - Add definition I2C_ADDR_MD as address condition select
+  - **icg/icg_wdt_interrupt_hw_startup**
+    - Add delay before WDT_GetStatus function
+  - **intc/intc_nmi_xtalstop**
+    - NMI_Handler add __DSB for Arm Errata 838869
+  - **mpu/mpu_core_write_protect**
+    - Fixed parameters error of Core_MPU_Region_Size
+    - MemManage_Handler add __DSB for Arm Errata 838869
+    - Modify trigger condition for RTC protection
+    - Optimize RTC init sequence
+  - **mpu/mpu_dma_write_protect**
+    - NMI_Handler add __DSB for Arm Errata 838869
+    - Remove key jitter
+  - **mpu/mpu_ip_read_protect**
+    - BusFault_Handler add __DSB for Arm Errata 838869
+    - Optimize RTC init sequence
+  - **ots/ots_base**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **ots/ots_scaling_experiment**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **pwc/pwc_lpc**
+    - Modify typo
+    - Clear wake up event flag in PdMode_Init() function
+  - **pwc/pwc_stop_wake**
+    - Support PWC_STOP_WFE
+  - **rtc/rtc_alarm**
+    - Optimize RTC init sequence
+    - Replace XTAL32_ClkInit to BSP_XTAL32_Init
+  - **rtc/rtc_calendar**
+    - Optimize RTC init sequence
+    - Modify the judgment condition for RTC operation status
+  - **rtc/rtc_calibration_output**
+    - Optimize RTC init sequence
+    - Replace XTAL32_ClkInit to BSP_XTAL32_Init
+  - **rtc/rtc_intrusion_detect**
+    - Optimize RTC init sequence
+    - Replace XTAL32_ClkInit to BSP_XTAL32_Init
+  - **rtc/rtc_low_power**
+    - Optimize RTC init sequence
+    - Delete XTAL32_ClkInit
+  - **sdioc/sdioc_mmc**
+    - Modify RCA value about EMMC device
+    - Rename function SDMMC_CMD1_SendOperatCond to SDMMC_CMD1_SendOperateCond
+    - Rename MMC_CARD_STAT_PAG to MMC_CARD_STAT_PGM
+  - **sdioc/sdioc_sd**
+    - Rename function SDMMC_ACMD41_SendOperatCond to SDMMC_ACMD41_SendOperateCond
+  - **sdioc/sdioc_sdio**
+    - Add sdioc_sdio example
+  - **spi/spi_dma**
+    - Modify the IO properties of SPI
+  - **spi/spi_int**
+    - Modify the IO properties of SPI
+    - Modify rx interrupt priority of SPI
+  - **spi/spi_polling**
+    - Modify the IO properties of SPI
+    - Replace the tx&rx function of SPI
+  - **sram/sram_error_check**
+    - NMI_Handler add __DSB for Arm Errata 838869
+  - **systick/systick_int**
+    - SysTick_Handler add __DSB for Arm Errata 838869
+  - **timer0/timer0_basetimer**
+    - Replace XTAL32_Config to BSP_XTAL32_Init
+  - **timer2/timer2_capture**
+    - Refine code due to some of member type of struct stc_tmra_init_t is changed
+  - **timer2/timer2_clock_source**
+    - Refine code due to some of member type of struct stc_tmra_init_t is changed
+  - **timer4/timer4_event_compare**
+    - Update TMR4 event: EVT_SRC_TMR4_1_SCMP_UH -> EVT_SRC_TMR4_1_SCMP0
+  - **timer4/timer4_event_delay**
+    - Update TMR4 event: EVT_SRC_TMR4_1_SCMP_UH -> EVT_SRC_TMR4_1_SCMP0
+  - **timer4/timer4_pwm_through**
+    - Modify the initial configuration to achieve 0% or 100% duty cycle
+  - **timer6/timer6_capture**
+    - Modify the PWM stop polarity as high
+  - **timer6/timer6_capture_dual_buf**
+    - Modify the PWM stop polarity as high
+  - **timer6/timer6_cmp_deadtime**
+    - Remove redundant code
+  - **timer6/timer6_cmp_sawtooth**
+    - Remove redundant code
+  - **timer6/timer6_cmp_sawtooth_dual_buf**
+    - Remove redundant code
+  - **timer6/timer6_cmp_triangular_buf**
+    - Remove redundant code
+  - **timer6/timer6_define_pwm_number**
+    - Modify for Peripheral clock command process
+  - **timer6/timer6_hw_code_cnt**
+    - Modify debug info
+  - **timer6/timer6_pulse_encoder_z_count**
+    - Add timer6_pulse_encoder_z_count example
+  - **timera/timera_base_timer**
+    - Refine code due to some of member type of struct stc_tmra_init_t is changed
+  - **timera/timera_capture**
+    - Set XTAL as system clock source
+    - Refine code due to some of member type of struct stc_tmra_init_t is changed
+    - Modify uart baudrate:19200->115200
+  - **timera/timera_cascade_count**
+    - Refine code due to some of member type of struct stc_tmra_init_t is changed
+  - **timera/timera_compare_value_buffer**
+    - Set XTAL as system clock source
+    - Refine code due to some of member type of struct stc_tmra_init_t is changed
+    - Modify uart baudrate:19200->115200
+  - **timera/timera_pulse_encoder_z_count**
+    - Add timera_pulse_encoder_z_count example
+  - **timera/timera_pwm**
+    - Refine code due to some of member type of struct stc_tmra_init_t is changed
+  - **trng/trng_base**
+    - Set XTAL as system clock source
+    - Modify printf baudrate
+  - **usart/usart_clocksync_dma**
+    - Add usart_clocksync_dma example
+  - **usart/usart_smartcard_atr**
+    - Remove u32StopBit from stcSmartCardInit structure
+  - **usart/usart_uart_dma**
+    - Split register USART_DR to USART_RDR and USART_TDR
+  - **usart/usart_uart_multiprocessor**
+    - Optimize the RX process
+  - **wdt/wdt_interrupt_sw_startup**
+    - Add delay before WDT_GetStatus function
+#### utils
+------
+## V2.1.0  Jan 15, 2023
+#### documents
+#### drivers
+- ##### bsp/components
+  - **gt9xx**
+    - Add gt9xx component
+  - **nt35510**
+    - Compliant LCD drive IC: NT35310
+- ##### bsp/ev_hc32f4a0_lqfp176
+  - Add configuration of XTAL IO as analog function
+  - Add XTAL/XTAL32 IO define
+  - Re-define macro: BSP_KEY_KEY10_WAKEUP
+  - Add gt9xx bsp
+  - Add timing comments
+  - Optimize timing parameters
+  - Optimize function arguments
+  - Update function arguments
+  - Add macro-define:LIN & smartcard
+  - Initialize CS state
+- ##### cmsis/Device
+  - Modify headfile register address and register name based on reference manual Rev1.13
+  - Delete the __low_level_init function of IAR and $Sub$$main function of MDK
+- ##### hc32_ll_driver
+  - **generic**
+    - Modify version as 2.1.0
+    - Implemented the definition of __NO_INIT for AC6 and ARM Compiler
+    - ARM Compiler suppress warning message: diag_1296
+  - **interrupts_share**
+    - Rename I2Cx_Error_IrqHandler as I2Cx_EE_IrqHandler
+    - Refine TMRA CMP DCU MAU share handler
+  - **adc**
+    - Modify macro group definition: ADC_Scan_Mode, ADC_Sync_Unit, ADC_Sync_Mode
+    - API fixed: ADC_DeInit()
+  - **aos**
+    - Modified parameters name of API AOS_CommonTriggerCmd() and AOS_SetTriggerEventSrc()
+    - Macro name modified: from IS_AOS_TRIG_SEL to IS_AOS_TARGET
+    - Modified parameters name and comments of AOS_CommonTriggerCmd() and AOS_SetTriggerEventSrc()
+  - **can**
+    - Deleted redundant comments
+    - Remove CAN_FLAG_RX_BUF_OVF from CAN_FLAG_CLR_ALL
+    - API fixed: CAN_FillTxFrame(), CAN_GetStatus(), CAN_ClearStatus()
+  - **clk**
+    - Refine stc_clock_freq_t
+    - Fixed bug# GetClockFreq() API xtal32 value
+    - Modified CLK_PLLN_DEFAULT value
+    - Optimize API CLK_SetCANClockSrc(), add assert IS_PWC_UNLOCKED()
+  - **cmp**
+    - Modify structure stc_cmp_window_init_t
+    - Modify macro define for API
+  - **crc**
+    - Add waiting time after write CRC data
+  - **dac**
+    - Modify function: DAC_AMPCmd
+    - Modify function: DAC_AMPCmd and add assert
+    - Synchronize register: EN->E,ADPSL->ADCSL,ALIGN->DPSEL
+  - **dcu**
+    - Modify macro group comments: DCU_Interrupt_Type
+    - Synchronize register: DCU_INTSEL -> DCU_INTEVTSEL
+    - Modify function comments: DCU_IntCmd
+  - **dma**
+    - Modify DMA_StructInit() default value
+    - Modify API DMA_DeInit and add LLP address assert
+  - **efm**
+    - Add Flash protect level define
+    - Code refine
+    - Use define to replace magic data
+    - Add API EFM_Protect_Enable & EFM_WriteSecurityCode
+    - Modify API EFM_Read & EFM_Program
+  - **emb**
+    - Modify structure comments:stc_emb_monitor_tmr_pwm_t
+    - Optimize function: EMB_TMR4_Init
+    - Optimize function: EMB_TMR6_Init
+  - **fcm**
+    - Modify parameter check for reference clock source
+  - **gpio**
+    - Add API GPIO_AnalogCmd() and GPIO_ExIntCmd()
+  - **i2c**
+    - Add API I2C_SlaveAddrCmd()
+    - Add API I2C_SlaveAddrCmd(), modify API I2C_SlaveAddrConfig()
+  - **icg**
+    - Delete ICG2 function
+  - **interrupts**
+    - Delete comment code
+    - Add macro-definition: EIRQFR_REG/NMIENR_REG/INTWKEN_REG
+  - **mpu**
+    - Update define base on new head file
+    - Modify IS_MPU_SP_START_ADDR & SP start address
+  - **ots**
+    - API fixed: OTS_CalculateTemp()
+  - **pwc**
+    - Refine API PWC_STOP_Enter()
+    - Modify API PWC_HighSpeedToLowSpeed() base umRev1.13
+    - Optimize API PWC_STOP_ClockSelect() & comment
+  - **qspi**
+    - Modify the conditions for entering direct communication mode
+  - **smc**
+    - Modify EXMC_SMC_StructInit, EXMC_SMC_Init, EXMC_SMC_GetChipConfig
+    - Delete function comments: EXMC_SMC_Chipx
+  - **spi**
+    - Add frame level processing for API SPI_TxRx(),SPI_Tx()
+  - **sram**
+    - Deleted redundant comments
+  - **tmr2**
+    - Deleted redundant comments
+  - **tmr4**
+    - Update API parameter u16IntType to u32IntType
+    - Modify macro-define: TMR4_OCSR_MASK
+    - Re-name parameter u16IntType to u32IntType
+    - Add RCSR register data type
+  - **tmr6**
+    - Modify structure stc_tmr6_deadtime_config_t
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+    - Modify macro define for group TMR6_Emb_Ch_Define
+    - Modify macro define for group TMR6_hardware_xxx_condition_Define
+    - Modify macro define for group TMR6_HW_Count_xx_Cond_Define
+    - Modify macro define for group TMR6_Valid_Period_Count_Cond_Define
+    - Modify API TMR6_SetFilterClockDiv()
+    - Define variable in the beginning of the function
+  - **tmra**
+    - Comments optimization
+  - **trng**
+    - API fixed: TRNG_Init()
+  - **usart**
+    - Optimize UART DIV_Fraction calculation time
+    - Fix bug: expressions may cause overflow when calculate UART DIV_Fraction
+  - **usb**
+    - Add USB core ID select function
+    - Delete comment
+    - Add USB DMA function
+  - **utility**
+    - Support re-target printf for IAR EW version 9 or later
+#### midwares
+- ##### hc32/iec60730_class_b_stl
+  - Optimize macros definitions
+  - Modify USART_SR_TXE to USART_SR_TC in STL_ConsoleOutputChar()
+  - Fix warning: MISRAC2012-Rule-18.4
+  - Fix bug: Reading CC Build CRC32 value is error in release project
+- ##### hc32/usb
+  - Add USB core ID select function
+  - Modify for MISRAC
+  - Delete comment
+  - Fix bug for USB endpoint GET_STATUS request
+  - Modify for variable alignment
+  - Add bot xfer error processing
+  - Remove msc bot reset operation
+  - Optimize for device insert detection
+  - Remove the judgment of ErrCnt when xfer error
+#### projects
+- ##### ev_hc32f4a0_lqfp176/applications
+  - **functional_safety/iec60730_class_b**
+    - Add VBAT initialization
+    - Add configuration of XTAL32 IO as analog function
+  - **iap/iap_boot**
+    - Add configuration of XTAL IO as analog function
+  - **iap/iap_ymodem_boot**
+    - Add configuration of XTAL IO as analog function
+    - Add print strings for download and upload completion
+  - **usb/usb_dev_cdc**
+    - Modify for MISRAC
+    - Add USB core ID select function
+    - Modify DEV_MANUFACTURER_STRING
+  - **usb/usb_dev_cdc_msc**
+    - Modify for MISRAC
+    - Add USB core ID select function
+    - Using micro SD card as memory and support USB HS
+    - Add usb_dev_cdc_msc application
+    - Modify the error of CSD parameter calculation
+    - Modify DEV_MANUFACTURER_STRING
+    - Modify Vendor Identification
+  - **usb/usb_dev_hid_cdc**
+    - Modify for MISRAC
+    - Add USB core ID select function
+    - Modify DEV_MANUFACTURER_STRING
+  - **usb/usb_dev_hid_custom**
+    - Add USB core ID select function
+    - Modify DEV_MANUFACTURER_STRING
+  - **usb/usb_dev_hid_msc**
+    - Add USB core ID select function
+    - Using micro SD card as memory and support USB HS
+    - Add usb_dev_hid_msc application
+    - Modify the error of CSD parameter calculation
+    - Modify DEV_MANUFACTURER_STRING
+    - Modify Vendor Identification
+  - **usb/usb_dev_mouse**
+    - Add USB core ID select function
+    - Modify DEV_MANUFACTURER_STRING
+  - **usb/usb_dev_msc**
+    - Add USB core ID select function
+    - Using micro SD card as memory and support USB HS
+    - Add usb_dev_msc application
+    - Modify the error of CSD parameter calculation
+    - Modify DEV_MANUFACTURER_STRING
+    - Modify Vendor Identification
+  - **usb/usb_host_cdc**
+    - Add USB core ID select function
+  - **usb/usb_host_mouse_kb**
+    - Add USB core ID select function
+  - **usb/usb_host_msc**
+    - Add USB core ID select function
+    - Support LFN print
+    - Fix bug for device disconnect detect
+- ##### ev_hc32f4a0_lqfp176/examples
+  - **adc/adc_awd**
+    - Comment fixed
+  - **adc/adc_base**
+    - Add configuration of XTAL IO as analog function
+    - Add configuration usage of sampling time
+  - **can/can_classical**
+    - CAN_IrqCallback() fixed
+  - **can/can_fd**
+    - CAN_IrqCallback() fixed
+  - **can/can_ttcan**
+    - CAN_IrqCallback() fixed
+  - **clk/clk_switch_sysclk**
+    - Add configuration of XTAL and XTAL32 IO as analog function
+  - **clk/clk_xtalstop_detect**
+    - Add configuration of XTAL IO as analog function
+  - **cmp/cmp_normal_blankwindow**
+    - Modify for driver update
+  - **cmp/cmp_normal_int**
+    - Modify for driver update
+  - **cmp/cmp_window**
+    - Modify for driver update
+  - **ctc/ctc_ctcref_trimming**
+    - Add configuration of XTAL IO as analog function
+  - **ctc/ctc_xtal32_trimming**
+    - Add configuration of XTAL and XTAL32 IO as analog function
+  - **ctc/ctc_xtal_trimming**
+    - Add configuration of XTAL IO as analog function
+  - **dac/dac_base**
+    - Simplify the dac base example
+  - **dac/dac_sync_mode**
+    - Add dac_sync_mode example
+  - **efm/efm_protect**
+    - Add efm_protect example
+  - **emb/emb_cmp_brake_timer4**
+    - Sync CMP and DAC driver
+  - **emb/emb_cmp_brake_timer6**
+    - Sync CMP and DAC driver
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **emb/emb_osc_brake_timer4**
+    - Add configuration of XTAL IO as analog function
+  - **emb/emb_osc_brake_timer6**
+    - Add configuration of XTAL IO as analog function
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **emb/emb_port_brake_timer6**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **emb/emb_pwm_brake_timer6**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **emb/emb_sw_brake_timer6**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **eth/eth_loopback**
+    - Delect RX_ER Pin in RMII mode
+  - **eth/eth_twoboards**
+    - Add configuration of XTAL IO as analog function
+  - **exmc/exmc_dmc_sdram_is42s16400j7tli**
+    - Initialize buffer with random data
+  - **exmc/exmc_nfc_nandflash_mt29f2g08ab**
+    - Initialize buffer with random data
+  - **exmc/exmc_sdram_sram**
+    - Add exmc_sdram_sram example
+  - **exmc/exmc_smc_lcd_nt35510**
+    - Add exmc_smc_lcd_nt35510 example
+  - **exmc/exmc_smc_sram_is62wv51216**
+    - Initialize buffer with random data
+  - **fcm/fcm_freq_measure**
+    - Add configuration of XTAL and XTAL32 IO as analog function
+    - Modify print process after clear flag in IRQ handle
+    - Modify reference clock for SWDTLRC
+  - **hrpwm/hrpwm_output**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **i2c/i2c_master_dma**
+    - Add i2c_master_dma example
+  - **i2c/i2c_master_int**
+    - Modify LED blink time
+  - **i2c/i2c_master_polling**
+    - Modify LED blink time
+  - **i2c/i2c_slave_dma**
+    - Add i2c_slave_dma example
+  - **i2c/i2c_slave_int**
+    - Modify LED blink time
+  - **i2c/i2c_slave_polling**
+    - Modify LED blink time
+  - **icg/icg_swdt_interrupt_hw_startup**
+    - Exchange LED color
+  - **icg/icg_wdt_interrupt_hw_startup**
+    - Exchange LED color
+  - **intc/intc_nmi_xtalstop**
+    - Add configuration of XTAL IO as analog function
+  - **ots/ots_base**
+    - Print log fixed
+  - **pwc/pwc_lpc**
+    - Code refine
+  - **pwc/pwc_lvd**
+    - Add filter configure to LVD initialize
+  - **pwc/pwc_stop_wake**
+    - Code refine
+  - **rtc/rtc_alarm**
+    - Add configuration of XTAL32 IO as analog function
+  - **rtc/rtc_calibration_output**
+    - Add configuration of XTAL32 IO as analog function
+  - **rtc/rtc_intrusion_detect**
+    - Add configuration of XTAL32 IO as analog function
+  - **rtc/rtc_low_power**
+    - Add configuration of XTAL32 IO as analog function
+  - **sdioc/sdioc_mmc**
+    - Add configuration of XTAL IO as analog function
+    - Add the function to get extended CSD register
+  - **sdioc/sdioc_sd**
+    - Add configuration of XTAL IO as analog function
+    - Modify the error of CSD parameter calculation
+  - **swdt/swdt_interrupt_sw_startup**
+    - Exchange LED color
+  - **timer0/timer0_basetimer**
+    - Add configuration of XTAL32 IO as analog function
+  - **timer2/timer2_capture**
+    - Macro definition fixed
+  - **timer4/timer4_counter_sawtooth**
+    - Fix MISRA warning: MISRAC2012-Rule-10.3
+  - **timer6/timer6_capture**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+    - Modify macro define for group TMR6_hardware_xxx_condition_Define
+  - **timer6/timer6_capture_dual_buf**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+    - Modify macro define for group TMR6_hardware_xxx_condition_Define
+  - **timer6/timer6_cmp_deadtime**
+    - Modify structure stc_tmr6_deadtime_config_t
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **timer6/timer6_cmp_sawtooth**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **timer6/timer6_cmp_sawtooth_dual_buf**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **timer6/timer6_cmp_triangular_buf**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **timer6/timer6_define_pwm_number**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **timer6/timer6_hw_code_cnt**
+    - Modify macro define for group TMR6_HW_Count_xx_Cond_Define
+  - **timer6/timer6_hw_sta_stp_clr**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+    - Modify macro define for group TMR6_hardware_xxx_condition_Define
+  - **timer6/timer6_sw_sync**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+    - Code refine for peripheral clock command
+  - **timer6/timer6_valid_period**
+    - Modify structure stc_timer6_init_t to stc_tmr6_init_t
+  - **timera/timera_base_timer**
+    - Comments fixed
+  - **timera/timera_capture**
+    - TMRA_IrqCallback(): comment fixed, print log fixed
+  - **timera/timera_pwm**
+    - Comment fixed
+  - **usart/usart_clocksync_int**
+    - Read USART_DR.RDR when USART overrun error occur
+  - **usart/usart_smartcard_atr**
+    - Add delay time for smartcard cold reset
+    - Read USART_DR.RDR when USART overrun error occur.
+  - **usart/usart_uart_dma**
+    - Delete the redundant code
+    - Read USART_DR.RDR when USART overrun error occur.
+    - Update UART timeout function calculating formula for Timer0 CMP value
+  - **usart/usart_uart_halfduplex_int**
+    - Read USART_DR.RDR when USART overrun error occur
+  - **usart/usart_uart_int**
+    - Read USART_DR.RDR when USART overrun error occur
+  - **usart/usart_uart_multiprocessor**
+    - Read USART_DR.RDR when USART overrun error occur
+  - **usart/usart_uart_polling**
+    - Read USART_DR.RDR when USART overrun error occur
+  - **wdt/wdt_interrupt_sw_startup**
+    - Exchange LED color
+#### utils
+------
+## V2.0.0  Mar 31, 2022
+- Initial release.

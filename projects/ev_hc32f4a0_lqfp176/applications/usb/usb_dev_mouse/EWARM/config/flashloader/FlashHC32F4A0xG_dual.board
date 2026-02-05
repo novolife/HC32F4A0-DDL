@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_board>
+  <pass>
+    <loader>$PROJ_DIR$/config/flashloader/FlashHC32F4A0xG_dual_0.flash</loader>
+    <range>CODE 0x0 0x7FFFF</range>
+  </pass>
+<pass>
+    <loader>$PROJ_DIR$/config/flashloader/FlashHC32F4A0xG_dual_1.flash</loader>
+    <range>CODE 0x100000 0x17FFFF</range>
+  </pass>
+  <pass>
+    <loader>$PROJ_DIR$/config/flashloader/FlashHC32F4A0_otp.flash</loader>
+    <range>CODE 0x03000000 0x030017FF</range>
+  </pass>
+</flash_board>
+
+
